@@ -2,11 +2,13 @@ from tkinter import messagebox
 from tkinter import END
 import pyperclip
 
-from password_generator import generate_random_password
+from password_generator import PasswordGenerator
 
 
-class PasswordManager:
+class PasswordManager(PasswordGenerator):
     def __init__(self, website_input, username_input, password_input):
+        super().__init__()
+
         self.website_input = website_input
         self.username_input = username_input
         self.password_input = password_input
@@ -20,7 +22,7 @@ class PasswordManager:
         self.password = self.password_input.get()
 
     def generate_password(self):
-        self.password = generate_random_password()
+        self.password = self.generate_random_password()
         self.password_input.delete(0, "end")
         self.password_input.insert(0, self.password)
         pyperclip.copy(self.password)
@@ -36,8 +38,8 @@ class PasswordManager:
         self.update_entries()
         is_ok = messagebox.askokcancel(
             title=self.website,
-            message=f"These are the details: \n\nEmail: {self.username}\n" \
-                    f"Password: {self.password} \n\nIs it ok to save?"
+            message=f"These are the details: \n\nEmail:\n {self.username}\n\n" \
+                    f"Password:\n {self.password} \n\nIs it ok to save?"
         )
         if not is_ok:
             return False
