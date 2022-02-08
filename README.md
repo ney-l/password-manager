@@ -5,6 +5,7 @@ A basic offline password manager starter project implemented in Python.
 ## Features:
 - Fields you can save Website, Email/Username, Password
 - Let's you generate a random password
+- Genreated password is automatically copied to your clipboard
 - Email/Username is prefilled with your most email/username. This value is hardcoded in the code. 
 - The app validates your entries to make sure no field was left empty.
 - You are asked to confirm the credentials before the data is saved.

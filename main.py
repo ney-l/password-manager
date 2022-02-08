@@ -68,14 +68,14 @@ add_button = render_button(
     columnspan=2,
 )
 
+password_manager = PasswordManager(
+    website_input,
+    username_input,
+    password_input
+)
+
 
 def save():
-    password_manager = PasswordManager(
-        website_input,
-        username_input,
-        password_input
-    )
-
     is_valid = password_manager.validate()
 
     if is_valid:
@@ -86,5 +86,6 @@ def save():
 
 
 add_button.config(command=save)
+generate_button.config(command=password_manager.generate_password)
 
 window.mainloop()

@@ -1,5 +1,8 @@
 from tkinter import messagebox
 from tkinter import END
+import pyperclip
+
+from password_generator import generate_random_password
 
 
 class PasswordManager:
@@ -15,6 +18,12 @@ class PasswordManager:
         self.website = self.website_input.get()
         self.username = self.username_input.get()
         self.password = self.password_input.get()
+
+    def generate_password(self):
+        self.password = generate_random_password()
+        self.password_input.delete(0, "end")
+        self.password_input.insert(0, self.password)
+        pyperclip.copy(self.password)
 
     def validate(self):
         self.update_entries()
@@ -43,3 +52,4 @@ class PasswordManager:
         self.update_entries()
         with open("data.txt", mode="a") as file:
             file.write(f"{self.website},{self.username},{self.password}\n")
+
