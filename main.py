@@ -1,5 +1,6 @@
 from tkinter import *
 
+
 FONT_NAME = "Arial"
 frequently_used_email = "something@somewhere.com"
 
@@ -66,5 +67,21 @@ add_button = render_button(
     width=34,
     columnspan=2,
 )
+
+
+def save():
+    website = website_input.get()
+    username = username_input.get()
+    password = password_input.get()
+
+    with open("data.txt", mode="a") as file:
+        file.write(f"{website},{username},{password}\n")
+
+    website_input.delete(0, END)
+    password_input.delete(0, END)
+
+
+add_button.config(command=save)
+
 
 window.mainloop()
