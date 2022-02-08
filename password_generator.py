@@ -1,26 +1,46 @@
-# Password Generator Project
-from random import randint, shuffle, choice
+from random import randint, shuffle, choice, choices
+import requests
+
+word_list = []
+long_words = []
+short_words = []
 
 
-def pick_random_items(items, num):
-    random_items = [choice(items) for _ in range(num)]
-    return random_items
+def get_random_words():
+    global word_list
+    global short_words
+    global long_words
+
+    if len(word_list) > 0:
+        return pick_words()
+
+    URL = "https://www.mit.edu/~ecprice/wordlist.100000"
+    response = requests.get(URL)
+    word_list = response.text.split("\n")
+    short_words = [word for word in word_list if len(word_list) > 0 and len(word) <= 4]
+    long_words = [word for word in word_list if len(word_list) > 0 and 4 < len(word) < 9]
+    return pick_words()
+
+
+def pick_words():
+    random_long_words = choices(long_words, k=2)
+    random_short_words = choices(short_words, k=2)
+    return random_long_words + random_short_words
+
+
+def get_random_numbers():
+    all_numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    numbers = [choice(all_numbers) for _ in range(randint(2, 4))]
+    return numbers
 
 
 def generate_random_password():
-    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
-               'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
-               'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-    numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-    symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
+    password_words = get_random_words()
+    password_numbers = get_random_numbers()
+    password_numbers_as_str = "".join(password_numbers)
+    password_words.append(password_numbers_as_str)
+    shuffle(password_words)
+    return "-".join(password_words)
 
-    password_letters = pick_random_items(letters, randint(8, 10))
-    password_symbols = pick_random_items(symbols, randint(2, 4))
-    password_numbers = pick_random_items(numbers, randint(2, 4))
 
-    password_list = password_letters + password_symbols + password_numbers
-
-    shuffle(password_list)
-
-    return "".join(password_list)
 

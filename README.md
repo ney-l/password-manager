@@ -1,6 +1,6 @@
 # About
 
-A basic offline password manager starter project implemented in Python that saves your credentials locally and let's you generate a random password because we have all been here!
+A basic password manager starter project implemented in Python that saves your credentials locally and let's you generate a random password because we have all been here!
 
 ![img_1.png](docs/img_1.png)
 

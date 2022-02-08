@@ -38,13 +38,13 @@ def render_input(width, column, row, columnspan=1):
     return input_element
 
 
-website_input = render_input(width=37, column=1, row=1, columnspan=2)
+website_input = render_input(width=43, column=1, row=1, columnspan=2)
 website_input.focus()
 
-username_input = render_input(width=37, column=1, row=2, columnspan=2)
+username_input = render_input(width=43, column=1, row=2, columnspan=2)
 username_input.insert(END, frequently_used_email)
 
-password_input = render_input(width=21, column=1, row=3)
+password_input = render_input(width=26, column=1, row=3)
 
 
 def render_button(text, column, row, width, columnspan=1):
@@ -64,7 +64,7 @@ add_button = render_button(
     text="Add",
     column=1,
     row=4,
-    width=34,
+    width=41,
     columnspan=2,
 )
 
