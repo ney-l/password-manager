@@ -2,12 +2,12 @@ from tkinter import *
 from password_manager import PasswordManager
 
 FONT_NAME = "Arial"
-frequently_used_email = "something@somewhere.com"
+frequently_used_email = "someone@somewhere.com"
 
 window = Tk()
 window.title("My Password Manager")
 window.config(padx=50, pady=50)
-window.geometry("+1+1")  # Shows window at the top left of the screen (personal preference)
+# window.geometry("+1+1")  # Shows window at the top left of the screen (personal preference)
 
 # Render Logo
 canvas = Canvas(width=200, height=200, )
