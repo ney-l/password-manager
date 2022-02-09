@@ -38,7 +38,7 @@ def render_input(width, column, row, columnspan=1):
     return input_element
 
 
-website_input = render_input(width=43, column=1, row=1, columnspan=2)
+website_input = render_input(width=26, column=1, row=1)
 website_input.focus()
 
 username_input = render_input(width=43, column=1, row=2, columnspan=2)
@@ -57,6 +57,13 @@ generate_button = render_button(
     text="Generate Password",
     column=2,
     row=3,
+    width=12
+)
+
+search_button = render_button(
+    text="Search",
+    column=2,
+    row=1,
     width=12
 )
 
@@ -87,5 +94,6 @@ def save():
 
 add_button.config(command=save)
 generate_button.config(command=password_manager.generate_password)
+search_button.config(command=password_manager.find_password)
 
 window.mainloop()

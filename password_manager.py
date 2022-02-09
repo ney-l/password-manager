@@ -72,3 +72,31 @@ class PasswordManager(PasswordGenerator):
             # Save updated data
             with open("data.json", mode="w") as file:
                 json.dump(data, file, indent=4)
+
+    def load_saved_passwords(self):
+        try:
+            with open("data.json", mode="r") as file:
+                data = json.load(file)
+        except FileNotFoundError:
+            with open("data.json", mode="w") as file:
+                data = {}
+                json.dump(data, file, indent=4)
+        finally:
+            return data
+
+    def find_password(self):
+        self.update_entries()
+        data = self.load_saved_passwords()
+        try:
+            print(data[self.website])
+            credentials = data[self.website]
+            username = credentials["username"]
+            password = credentials["password"]
+            messagebox.showinfo(
+                title=self.website,
+                message=f"Website:\n {self.website}\n\n"
+                        f"Username:\n {username}\n\n"
+                        f"Password:\n {password}"
+            )
+        except KeyError:
+            messagebox.showerror(message="No details for the website exists")
