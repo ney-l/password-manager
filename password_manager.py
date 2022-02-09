@@ -42,9 +42,7 @@ class PasswordManager(PasswordGenerator):
             message=f"These are the details: \n\nEmail:\n {self.username}\n\n" \
                     f"Password:\n {self.password} \n\nIs it ok to save?"
         )
-        if not is_ok:
-            return False
-        return True
+        return is_ok
 
     def clear_entries(self):
         self.website_input.delete(0, END)
