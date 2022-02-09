@@ -1,3 +1,4 @@
+import json
 from tkinter import messagebox
 from tkinter import END
 import pyperclip
@@ -50,8 +51,24 @@ class PasswordManager(PasswordGenerator):
         self.password_input.delete(0, END)
 
     def save_to_file(self):
-        print('called')
         self.update_entries()
-        with open("data.txt", mode="a") as file:
-            file.write(f"{self.website},{self.username},{self.password}\n")
+        new_data = {
+            self.website: {
+                "username": self.username,
+                "password": self.password
+            }
+        }
 
+        try:
+            # Read json data
+            with open("data.json", mode="r") as file:
+                data = json.load(file)
+        except FileNotFoundError:
+            with open("data.json", mode="w") as file:
+                json.dump(new_data, file, indent=4)
+        else:
+            # Update data
+            data.update(new_data)
+            # Save updated data
+            with open("data.json", mode="w") as file:
+                json.dump(data, file, indent=4)
