@@ -88,7 +88,6 @@ class PasswordManager(PasswordGenerator):
         self.update_entries()
         data = self.load_saved_passwords()
         try:
-            print(data[self.website])
             credentials = data[self.website]
             username = credentials["username"]
             password = credentials["password"]
