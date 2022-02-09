@@ -57,19 +57,11 @@ class PasswordManager(PasswordGenerator):
             }
         }
 
-        try:
-            # Read json data
-            with open("data.json", mode="r") as file:
-                data = json.load(file)
-        except FileNotFoundError:
-            with open("data.json", mode="w") as file:
-                json.dump(new_data, file, indent=4)
-        else:
-            # Update data
-            data.update(new_data)
-            # Save updated data
-            with open("data.json", mode="w") as file:
-                json.dump(data, file, indent=4)
+        data = self.load_saved_passwords()
+        data.update(new_data)
+        # Save updated data
+        with open("data.json", mode="w") as file:
+            json.dump(data, file, indent=4)
 
     def load_saved_passwords(self):
         try:
